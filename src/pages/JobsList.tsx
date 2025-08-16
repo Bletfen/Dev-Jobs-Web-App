@@ -1,9 +1,12 @@
+import { useState } from "react";
 import Filter from "../components/Filter.tsx";
 import dataBase from "../../data.json";
+import FilterPopUp from "../components/FilterPopUp.tsx";
 export default function JobsList() {
+  const [showFilter, setShowFilter] = useState<boolean>(false);
   return (
     <div className="px-[2.4rem]">
-      <Filter />
+      <Filter setShowFilter={setShowFilter} />
       {dataBase.map((job) => (
         <div>
           <div>
@@ -33,6 +36,7 @@ export default function JobsList() {
         </div>
       ))}
       <button>Load More</button>
+      <FilterPopUp showFilter={showFilter} setShowFilter={setShowFilter} />
     </div>
   );
 }
