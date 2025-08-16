@@ -1,7 +1,12 @@
+import type { MainFilterState } from "../../types.d.ts";
 export default function Filter({
   setShowFilter,
+  setMainFilter,
+  inputRef,
 }: {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  setMainFilter: React.Dispatch<React.SetStateAction<MainFilterState>>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   return (
     <div
@@ -11,6 +16,7 @@ export default function Filter({
     >
       <div>
         <input
+          ref={inputRef}
           type="text"
           placeholder="Filter by title…"
           className="
@@ -40,6 +46,11 @@ export default function Filter({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="cursor-pointer"
+          onClick={() => {
+            if (inputRef.current) {
+              setMainFilter({ position: inputRef.current.value });
+            }
+          }}
         >
           <rect width="48" height="48" rx="5" fill="#5964E0" />
           <path

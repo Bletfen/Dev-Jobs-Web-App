@@ -1,10 +1,19 @@
+import type { PopUpFilterState } from "../../types";
+import { useRef, useState } from "react";
 export default function FilterPopUp({
   showFilter,
   setShowFilter,
+  setPopUpFilter,
+  popUpFilter,
 }: {
   showFilter: boolean;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  setPopUpFilter: React.Dispatch<React.SetStateAction<PopUpFilterState>>;
+  popUpFilter: PopUpFilterState;
 }) {
+  const locationRef = useRef<HTMLInputElement>(null);
+  const fullTimeRef = useRef<HTMLButtonElement>(null);
+  const [check, setChecked] = useState<boolean>(false);
   return (
     <>
       {showFilter && (
@@ -15,17 +24,17 @@ export default function FilterPopUp({
           ></div>
           <div
             className="absolute top-1/2 left-1/2
-        -translate-x-1/2 -translate-y-1/2
-        bg-white rounded-[0.6rem]
-        max-w-[32.7rem]
-        flex flex-col"
+            -translate-x-1/2 -translate-y-1/2
+            bg-white rounded-[0.6rem]
+            max-w-[32.7rem]
+            flex flex-col"
           >
             <div>
               <div
                 className="flex
-            p-[2.4rem]
-            gap-[1.6rem]
-            items-center"
+                p-[2.4rem]
+                gap-[1.6rem]
+                items-center"
               >
                 <svg
                   width="17"
@@ -42,32 +51,50 @@ export default function FilterPopUp({
                   />
                 </svg>
                 <input
+                  ref={locationRef}
                   type="text"
                   placeholder="Filter by location…"
                   className="text-[#19202d] text-[1.6rem]
-          outline-none"
+                    outline-none"
                 />
               </div>
               <div
                 className="h-px bg-[#6e8098]
-            opacity-[0.2] w-full
-            "
+                opacity-[0.2] w-full
+                "
               ></div>
             </div>
             <div className="flex p-[2.4rem] gap-[1.6rem] items-center">
               <button
-                className="w-[2.4rem] h-[2.4rem]
-            bg-[#19202d] opacity-[0.1035] rounded-[0.3rem]
-            cursor-pointer"
+                ref={fullTimeRef}
+                className={`w-[2.4rem] h-[2.4rem]
+                rounded-[0.3rem] cursor-pointer
+                ${check ? "bg-[#5964e0]" : "bg-[#19202d] opacity-15"}`}
+                onClick={() => setChecked((prev) => !prev)}
               ></button>
               <p>Full Time Only</p>
             </div>
             <div className="px-[2.4rem] pb-[2.4rem]">
               <button
                 className="py-[1.6rem]
-            bg-[#5964e0] rounded-[0.5rem] w-full
-            text-[1.6rem] font-[700] text-[#fff]
-            cursor-pointer"
+                bg-[#5964e0] rounded-[0.5rem] w-full
+                text-[1.6rem] font-[700] text-[#fff]
+                cursor-pointer"
+                onClick={() => {
+                  if (locationRef.current) {
+                    setPopUpFilter((prev) => ({
+                      ...prev,
+                      location: locationRef.current?.value || "",
+                    }));
+                  }
+                  if (fullTimeRef.current) {
+                    setPopUpFilter((prev) => ({
+                      ...prev,
+                      fullTime: !prev.fullTime,
+                    }));
+                  }
+                  setShowFilter(false);
+                }}
               >
                 Search
               </button>
