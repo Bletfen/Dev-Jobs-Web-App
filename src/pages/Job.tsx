@@ -10,7 +10,7 @@ export default function Job() {
       navigate("/");
     }
     document.title = `${job?.company} | ${job?.position}`;
-  }, [id]);
+  }, []);
   return (
     <div
       className="bg-[#f4f6f8]
