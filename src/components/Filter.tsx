@@ -86,7 +86,7 @@ export default function Filter({
             />
           </div>
           <div
-            className="hidden md:flex h-full w-px bg-[#6e8098]
+            className="hidden md:flex h-full w-px bg-[#6e8098]/20
             absolute right-0 top-0"
           ></div>
         </div>
@@ -122,7 +122,7 @@ export default function Filter({
             />
           </div>
           <div
-            className="hidden md:flex h-full w-px bg-[#6e8098]
+            className="hidden md:flex h-full w-px bg-[#6e8098]/20
             absolute right-0 top-0"
           ></div>
         </div>
@@ -159,7 +159,7 @@ export default function Filter({
                 ref={fullTimeRef}
                 className={`w-[2.4rem] h-[2.4rem]
                 rounded-[0.3rem] cursor-pointer
-                bg-white/10
+                bg-[#19202d]/10 dark:bg-white/10
                 `}
                 onClick={() => setChecked(true)}
               ></button>

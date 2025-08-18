@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const handleClick = () => {
@@ -36,9 +37,9 @@ export default function Header() {
         max-w-[111rem] mx-auto
         "
       >
-        <div>
+        <Link to={"/"}>
           <img src="/assets/desktop/logo.svg" alt="logo-svg" />
-        </div>
+        </Link>
         <div className="flex items-center gap-[1.6rem]">
           <img src="/assets/desktop/icon-sun.svg" alt="" />
           <div
