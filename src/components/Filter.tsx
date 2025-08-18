@@ -1,4 +1,9 @@
 import { useRef, useState } from "react";
+import {
+  handleContract,
+  handleLocation,
+  handlePosition,
+} from "../functions/function";
 
 export default function Filter({
   setShowFilter,
@@ -104,17 +109,33 @@ export default function Filter({
             className="flex gap-[1.6rem] items-center
             shrink-0"
           >
-            <button
-              ref={fullTimeRef}
-              className={`w-[2.4rem] h-[2.4rem]
+            {check ? (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                onClick={() => setChecked(false)}
+              >
+                <rect width="24" height="24" rx="3" fill="#5964E0" />
+                <path
+                  d="M6 12.5695L9.57248 16.142L18.7144 7"
+                  stroke="white"
+                  stroke-width="2"
+                />
+              </svg>
+            ) : (
+              <button
+                ref={fullTimeRef}
+                className={`w-[2.4rem] h-[2.4rem]
                 rounded-[0.3rem] cursor-pointer
-                ${
-                  check
-                    ? "bg-[#5964e0]"
-                    : "bg-[#19202d] opacity-15 dark:bg-[#fff]"
-                }`}
-              onClick={() => setChecked((prev) => !prev)}
-            ></button>
+                bg-white/10
+                `}
+                onClick={() => setChecked(true)}
+              ></button>
+            )}
+
             <p
               className="text-[1.6rem] font-bold 
                 text-[#19202d] dark:text-white"
@@ -127,23 +148,13 @@ export default function Filter({
               className="py-[1.6rem]
                 bg-[#5964e0] rounded-[0.5rem]
                 text-[1.6rem] font-[700] text-[#fff]
-                cursor-pointer px-[1.4rem]"
+                cursor-pointer px-[1.4rem]
+                hover:bg-[#939bf4]
+                transition-all duration-300"
               onClick={() => {
-                if (locationRef.current) {
-                  setPopUpFilter((prev: Partial<IJobs>) => ({
-                    ...prev,
-                    location: locationRef.current?.value || "",
-                  }));
-                }
-                if (fullTimeRef.current) {
-                  setPopUpFilter((prev: Partial<IJobs>) => ({
-                    ...prev,
-                    contract: check === true ? "full time" : "",
-                  }));
-                  if (inputRef.current) {
-                    setMainFilter({ position: inputRef.current.value });
-                  }
-                }
+                handleLocation({ locationRef, setPopUpFilter });
+                handleContract({ check, setPopUpFilter });
+                handlePosition({ inputRef, setMainFilter });
               }}
             >
               Search
@@ -177,9 +188,7 @@ export default function Filter({
           className="cursor-pointer
           md:hidden"
           onClick={() => {
-            if (inputRef.current) {
-              setMainFilter({ position: inputRef.current.value });
-            }
+            handlePosition({ inputRef, setMainFilter });
           }}
         >
           <rect width="48" height="48" rx="5" fill="#5964E0" />

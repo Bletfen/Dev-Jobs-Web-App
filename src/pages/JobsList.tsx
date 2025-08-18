@@ -78,7 +78,8 @@ export default function JobsList() {
               className={`w-[5rem] h-[5rem]
                 flex items-center justify-center
                 rounded-[1.5rem]
-                absolute -top-10`}
+                absolute -top-10
+                `}
               style={{ backgroundColor: job.logoBackground }}
             >
               <img src={job.logo} alt="logo" />
@@ -130,18 +131,22 @@ export default function JobsList() {
         ))}
       </div>
 
-      <button
-        className="flex
+      {filteredJobs.length > 12 && (
+        <button
+          className="flex
         w-[14.1rem] mx-auto
         bg-[#5964e0] rounded-[0.5rem]
         pl-[3rem] pr-[2.3rem] py-[1.6rem]
         mt-[3.2rem]
         text-white text-[1.6rem] font-bold
-        text-center"
-        onClick={handleShowMore}
-      >
-        {showMore >= filteredJobs.length ? "Show Less" : "Show More"}
-      </button>
+        cursor-pointer
+        hover:bg-[#939bf4]
+        transition-all duration-300"
+          onClick={handleShowMore}
+        >
+          {showMore >= filteredJobs.length ? "Show Less" : "Show More"}
+        </button>
+      )}
 
       <div className="md:hidden">
         <FilterPopUp
