@@ -11,7 +11,7 @@ export default function FilterPopUp({
 }) {
   const locationRef = useRef<HTMLInputElement>(null);
   const fullTimeRef = useRef<HTMLButtonElement>(null);
-  const [check, setChecked] = useState<boolean>(false);
+  const [check, setChecked] = useState<string>("");
   return (
     <>
       {showFilter && (
@@ -67,8 +67,16 @@ export default function FilterPopUp({
                 ref={fullTimeRef}
                 className={`w-[2.4rem] h-[2.4rem]
                 rounded-[0.3rem] cursor-pointer
-                ${check ? "bg-[#5964e0]" : "bg-[#19202d] opacity-15"}`}
-                onClick={() => setChecked((prev) => !prev)}
+                ${
+                  check === "full time"
+                    ? "bg-[#5964e0]"
+                    : "bg-[#19202d] opacity-15"
+                }`}
+                onClick={() =>
+                  setChecked((prev) =>
+                    prev === "full time" ? "" : "full time"
+                  )
+                }
               ></button>
               <p>Full Time Only</p>
             </div>
@@ -80,15 +88,15 @@ export default function FilterPopUp({
                 cursor-pointer"
                 onClick={() => {
                   if (locationRef.current) {
-                    setPopUpFilter((prev) => ({
+                    setPopUpFilter((prev: Partial<IJobs>) => ({
                       ...prev,
                       location: locationRef.current?.value || "",
                     }));
                   }
                   if (fullTimeRef.current) {
-                    setPopUpFilter((prev) => ({
+                    setPopUpFilter((prev: Partial<IJobs>) => ({
                       ...prev,
-                      fullTime: !prev.fullTime,
+                      contract: !prev.contract,
                     }));
                   }
                   setShowFilter(false);

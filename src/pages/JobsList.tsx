@@ -1,33 +1,33 @@
 import { useState, useRef } from "react";
 import Filter from "../components/Filter.tsx";
-import dataBase from "../../data.json";
 import FilterPopUp from "../components/FilterPopUp.tsx";
-import type { MainFilterState, PopUpFilterState } from "../../types.d.ts";
 import { Link } from "react-router-dom";
+import { useJobsContext } from "../context/JobsContext.tsx";
 export default function JobsList() {
+  const { jobs } = useJobsContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [mainFilter, setMainFilter] = useState<MainFilterState>({
+  const [mainFilter, setMainFilter] = useState<Partial<IJobs>>({
     position: "",
   });
-  const [popUpFilter, setPopUpFilter] = useState<PopUpFilterState>({
-    fullTime: false,
+  const [popUpFilter, setPopUpFilter] = useState<Partial<IJobs>>({
+    contract: "",
     location: "",
   });
 
-  const mainSearch = dataBase.filter(
+  const mainSearch = jobs.filter(
     (job) =>
-      mainFilter.position === "" ||
+      !mainFilter.position ||
       job.position.toLowerCase().includes(mainFilter.position.toLowerCase())
   );
 
   const filteredJobs = mainSearch.filter((job) => {
     const matchesLocation =
-      popUpFilter.location === "" ||
+      !popUpFilter.location ||
       job.location.toLowerCase().includes(popUpFilter.location.toLowerCase());
 
     const matchesContract =
-      !popUpFilter.fullTime || job.contract.toLowerCase() === "full time";
+      !popUpFilter.contract || job.contract.toLowerCase() === "full time";
     return matchesLocation && matchesContract;
   });
 

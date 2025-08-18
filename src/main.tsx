@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./layout/Layout.tsx";
 import Job from "./pages/Job.tsx";
 import JobsList from "./pages/JobsList.tsx";
+import JobsProvider from "./context/JobsContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <JobsProvider>
+      <RouterProvider router={router} />
+    </JobsProvider>
   </StrictMode>
 );
