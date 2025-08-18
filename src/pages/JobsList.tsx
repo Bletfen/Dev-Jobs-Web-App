@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Filter from "../components/Filter.tsx";
 import FilterPopUp from "../components/FilterPopUp.tsx";
 import { Link } from "react-router-dom";
@@ -34,6 +34,10 @@ export default function JobsList() {
       !popUpFilter.contract || job.contract.toLowerCase() === "full time";
     return matchesLocation && matchesContract;
   });
+
+  useEffect(() => {
+    document.title = "Dev Jobs Web App";
+  }, []);
 
   const handleShowMore = () => {
     setShowMore((prev) => (prev >= filteredJobs.length ? 12 : prev + 12));

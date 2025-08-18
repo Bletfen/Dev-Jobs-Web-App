@@ -1,8 +1,16 @@
+import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import useGetJobs from "../customHooks/GetContext";
 export default function Job() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const job = useGetJobs();
-  console.log(job);
-
+  useEffect(() => {
+    if (Number(id) !== job?.id) {
+      navigate("/");
+    }
+    document.title = `${job?.company} | ${job?.position}`;
+  }, [id]);
   return (
     <div
       className="bg-[#f4f6f8]
