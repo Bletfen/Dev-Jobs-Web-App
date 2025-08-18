@@ -14,6 +14,7 @@ export default function JobsList() {
     contract: "",
     location: "",
   });
+  const [showMore, setShowMore] = useState<number>(12);
 
   const mainSearch = jobs.filter(
     (job) =>
@@ -31,13 +32,19 @@ export default function JobsList() {
     return matchesLocation && matchesContract;
   });
 
+  const handleShowMore = () => {
+    setShowMore((prev) => (prev >= filteredJobs.length ? 12 : prev + 12));
+  };
+
   return (
     <div
       className="px-[2.4rem]
         bg-[#f4f6f8]
         pb-[6.2rem]
         dark:bg-[#121721]
-        transition-all duration-300"
+        transition-all duration-300
+        md:px-[3.9rem] min-h-screen
+        "
     >
       <Filter
         setShowFilter={setShowFilter}
@@ -48,9 +55,17 @@ export default function JobsList() {
 
       <div
         className="flex flex-col
-        gap-[4.9rem]"
+        gap-[4.9rem]
+        md:grid md:grid-cols-2
+        md:mt-[7rem]
+        md:gap-[unset]
+        md:gap-x-[1.1rem]
+        md:gap-y-[6.5rem]
+        xl:grid-cols-3
+        xl:gap-x-[3rem]
+        max-w-[111rem] mx-auto"
       >
-        {filteredJobs.map((job) => (
+        {filteredJobs.slice(0, showMore).map((job) => (
           <Link
             to={String(job.id)}
             key={job.id}
@@ -114,16 +129,20 @@ export default function JobsList() {
           </Link>
         ))}
       </div>
+
       <button
         className="flex
         w-[14.1rem] mx-auto
         bg-[#5964e0] rounded-[0.5rem]
-        px-[3rem] py-[1.6rem]
+        pl-[3rem] pr-[2.3rem] py-[1.6rem]
         mt-[3.2rem]
-        text-white text-[1.6rem] font-bold"
+        text-white text-[1.6rem] font-bold
+        text-center"
+        onClick={handleShowMore}
       >
-        Load More
+        {showMore >= filteredJobs.length ? "Show Less" : "Show More"}
       </button>
+
       <div className="md:hidden">
         <FilterPopUp
           showFilter={showFilter}

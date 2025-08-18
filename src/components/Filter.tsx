@@ -22,12 +22,13 @@ export default function Filter({
         relative bottom-17
         dark:bg-[#19202d]
         transition-all duration-300
-        w-full
+        w-full md:px-[unset] md:pl-[2.4rem] md:pr-[1.6rem]
+        max-w-[111rem] mx-auto
         "
     >
       <div
         className="md:flex
-        md:gap-[2.4rem]
+        md:gap-[2rem]
         w-full justify-around
         "
       >
@@ -35,7 +36,7 @@ export default function Filter({
           className="md:flex
           md:py-[1.6rem] relative
           w-full
-"
+          "
         >
           <div
             className="py-[1.6rem]
@@ -81,6 +82,7 @@ export default function Filter({
               />
             </svg>
             <input
+              ref={locationRef}
               type="text"
               placeholder="Filter by location…"
               className="text-[#19202d] text-[1.6rem]
@@ -96,7 +98,7 @@ export default function Filter({
         <div
           className="hidden md:flex
           w-full items-center
-          gap-[2.6rem]"
+          justify-between"
         >
           <div
             className="flex gap-[1.6rem] items-center
@@ -120,15 +122,12 @@ export default function Filter({
               Full Time
             </p>
           </div>
-          <div
-            className="
-            w-full"
-          >
+          <div>
             <button
               className="py-[1.6rem]
                 bg-[#5964e0] rounded-[0.5rem]
                 text-[1.6rem] font-[700] text-[#fff]
-                cursor-pointer w-full px-[1.4rem]"
+                cursor-pointer px-[1.4rem]"
               onClick={() => {
                 if (locationRef.current) {
                   setPopUpFilter((prev: Partial<IJobs>) => ({
@@ -141,8 +140,10 @@ export default function Filter({
                     ...prev,
                     contract: check === true ? "full time" : "",
                   }));
+                  if (inputRef.current) {
+                    setMainFilter({ position: inputRef.current.value });
+                  }
                 }
-                setShowFilter(false);
               }}
             >
               Search
