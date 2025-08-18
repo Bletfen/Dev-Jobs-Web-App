@@ -1,4 +1,3 @@
-import type { PopUpFilterState } from "../../types";
 import { useRef, useState } from "react";
 export default function FilterPopUp({
   showFilter,
@@ -7,11 +6,11 @@ export default function FilterPopUp({
 }: {
   showFilter: boolean;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
-  setPopUpFilter: React.Dispatch<React.SetStateAction<PopUpFilterState>>;
+  setPopUpFilter: React.Dispatch<React.SetStateAction<Partial<IJobs>>>;
 }) {
   const locationRef = useRef<HTMLInputElement>(null);
   const fullTimeRef = useRef<HTMLButtonElement>(null);
-  const [check, setChecked] = useState<string>("");
+  const [check, setChecked] = useState<boolean>(false);
   return (
     <>
       {showFilter && (
@@ -67,16 +66,8 @@ export default function FilterPopUp({
                 ref={fullTimeRef}
                 className={`w-[2.4rem] h-[2.4rem]
                 rounded-[0.3rem] cursor-pointer
-                ${
-                  check === "full time"
-                    ? "bg-[#5964e0]"
-                    : "bg-[#19202d] opacity-15"
-                }`}
-                onClick={() =>
-                  setChecked((prev) =>
-                    prev === "full time" ? "" : "full time"
-                  )
-                }
+                ${check ? "bg-[#5964e0]" : "bg-[#19202d] opacity-15"}`}
+                onClick={() => setChecked((prev) => !prev)}
               ></button>
               <p>Full Time Only</p>
             </div>
@@ -96,7 +87,7 @@ export default function FilterPopUp({
                   if (fullTimeRef.current) {
                     setPopUpFilter((prev: Partial<IJobs>) => ({
                       ...prev,
-                      contract: !prev.contract,
+                      contract: check === true ? "full time" : "",
                     }));
                   }
                   setShowFilter(false);

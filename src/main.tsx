@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <JobsList /> },
-      { path: "/:position", element: <Job /> },
+      { path: "/:id", element: <Job /> },
     ],
   },
 ]);
