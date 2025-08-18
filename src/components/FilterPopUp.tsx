@@ -12,11 +12,12 @@ export default function FilterPopUp({
   const fullTimeRef = useRef<HTMLButtonElement>(null);
   const [check, setChecked] = useState<boolean>(false);
   return (
-    <>
+    <div className="md:hidden">
       {showFilter && (
         <>
           <div
-            className="fixed inset-0 bg-black opacity-50"
+            className="fixed inset-0 bg-black opacity-50
+            "
             onClick={() => setShowFilter(false)}
           ></div>
           <div
@@ -109,6 +110,6 @@ export default function FilterPopUp({
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

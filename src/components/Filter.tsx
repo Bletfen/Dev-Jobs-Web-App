@@ -1,32 +1,159 @@
+import { useRef, useState } from "react";
+
 export default function Filter({
   setShowFilter,
   setMainFilter,
   inputRef,
+  setPopUpFilter,
 }: {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   setMainFilter: React.Dispatch<React.SetStateAction<Partial<IJobs>>>;
   inputRef: React.RefObject<HTMLInputElement | null>;
+  setPopUpFilter: React.Dispatch<React.SetStateAction<Partial<IJobs>>>;
 }) {
+  const locationRef = useRef<HTMLInputElement>(null);
+  const fullTimeRef = useRef<HTMLButtonElement>(null);
+  const [check, setChecked] = useState<boolean>(false);
   return (
     <div
       className="flex justify-between items-center
-        px-[2.4rem] py-[1.6rem] bg-white rounded-[0.6rem]
+        px-[2.4rem] bg-white rounded-[0.6rem] py-[1.6rem]
+        md:py-[unset]
         relative bottom-17
         dark:bg-[#19202d]
-        transition-all duration-300"
+        transition-all duration-300
+        w-full
+        "
     >
-      <div>
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Filter by title…"
-          className="
-            text-[1.6rem] font-[400] text-[#19202d]
-            outline-none dark:text-white
-            transition-all duration-300"
-        />
+      <div
+        className="md:flex
+        md:gap-[2.4rem]
+        w-full justify-around
+        "
+      >
+        <div
+          className="md:flex
+          md:py-[1.6rem] relative
+          w-full
+"
+        >
+          <div
+            className="py-[1.6rem]
+            w-full pr-[4rem]"
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Filter by title…"
+              className="
+              text-[1.6rem] font-[400] text-[#19202d]
+              outline-none dark:text-white
+              transition-all duration-300 w-full
+              "
+            />
+          </div>
+          <div
+            className="hidden md:flex h-full w-px bg-[#6e8098]
+            absolute right-0 top-0"
+          ></div>
+        </div>
+
+        <div
+          className="hidden md:flex
+          md:py-[1.6rem] relative
+          gap-[1.6rem]
+          w-full
+          items-center"
+        >
+          <div className="flex gap-[1.6rem]">
+            <svg
+              width="17"
+              height="24"
+              viewBox="0 0 17 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8.44772 0C10.6804 0 12.7797 0.870546 14.3585 2.45105C17.2803 5.37556 17.6434 10.8781 15.1348 14.2255L8.44772 23.894L1.75059 14.2119C-0.747974 10.8781 -0.384871 5.37556 2.53695 2.45105C4.11577 0.870546 6.21462 0 8.44772 0ZM5.47359 8.29091C5.47359 9.97484 6.84274 11.3455 8.52487 11.3455C10.207 11.3455 11.5762 9.97484 11.5762 8.29091C11.5762 6.60698 10.207 5.23636 8.52487 5.23636C6.84274 5.23636 5.47359 6.60698 5.47359 8.29091Z"
+                fill="#5964E0"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="Filter by location…"
+              className="text-[#19202d] text-[1.6rem]
+                    outline-none dark:text-white"
+            />
+          </div>
+          <div
+            className="hidden md:flex h-full w-px bg-[#6e8098]
+            absolute right-0 top-0"
+          ></div>
+        </div>
+
+        <div
+          className="hidden md:flex
+          w-full items-center
+          gap-[2.6rem]"
+        >
+          <div
+            className="flex gap-[1.6rem] items-center
+            shrink-0"
+          >
+            <button
+              ref={fullTimeRef}
+              className={`w-[2.4rem] h-[2.4rem]
+                rounded-[0.3rem] cursor-pointer
+                ${
+                  check
+                    ? "bg-[#5964e0]"
+                    : "bg-[#19202d] opacity-15 dark:bg-[#fff]"
+                }`}
+              onClick={() => setChecked((prev) => !prev)}
+            ></button>
+            <p
+              className="text-[1.6rem] font-bold 
+                text-[#19202d] dark:text-white"
+            >
+              Full Time
+            </p>
+          </div>
+          <div
+            className="
+            w-full"
+          >
+            <button
+              className="py-[1.6rem]
+                bg-[#5964e0] rounded-[0.5rem]
+                text-[1.6rem] font-[700] text-[#fff]
+                cursor-pointer w-full px-[1.4rem]"
+              onClick={() => {
+                if (locationRef.current) {
+                  setPopUpFilter((prev: Partial<IJobs>) => ({
+                    ...prev,
+                    location: locationRef.current?.value || "",
+                  }));
+                }
+                if (fullTimeRef.current) {
+                  setPopUpFilter((prev: Partial<IJobs>) => ({
+                    ...prev,
+                    contract: check === true ? "full time" : "",
+                  }));
+                }
+                setShowFilter(false);
+              }}
+            >
+              Search
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="flex items-center gap-[2.4rem]">
+      <div
+        className="flex items-center gap-[2.4rem]
+        md:hidden"
+      >
         <svg
           width="20"
           height="20"
@@ -46,7 +173,8 @@ export default function Filter({
           viewBox="0 0 48 48"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="cursor-pointer"
+          className="cursor-pointer
+          md:hidden"
           onClick={() => {
             if (inputRef.current) {
               setMainFilter({ position: inputRef.current.value });

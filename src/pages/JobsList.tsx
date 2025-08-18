@@ -43,7 +43,9 @@ export default function JobsList() {
         setShowFilter={setShowFilter}
         setMainFilter={setMainFilter}
         inputRef={inputRef}
+        setPopUpFilter={setPopUpFilter}
       />
+
       <div
         className="flex flex-col
         gap-[4.9rem]"
@@ -122,11 +124,13 @@ export default function JobsList() {
       >
         Load More
       </button>
-      <FilterPopUp
-        showFilter={showFilter}
-        setShowFilter={setShowFilter}
-        setPopUpFilter={setPopUpFilter}
-      />
+      <div className="md:hidden">
+        <FilterPopUp
+          showFilter={showFilter}
+          setShowFilter={setShowFilter}
+          setPopUpFilter={setPopUpFilter}
+        />
+      </div>
     </div>
   );
 }
