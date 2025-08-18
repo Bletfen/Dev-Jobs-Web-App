@@ -9,6 +9,7 @@ export default function JobsList() {
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [mainFilter, setMainFilter] = useState<Partial<IJobs>>({
     position: "",
+    company: "",
   });
   const [popUpFilter, setPopUpFilter] = useState<Partial<IJobs>>({
     contract: "",
@@ -16,11 +17,13 @@ export default function JobsList() {
   });
   const [showMore, setShowMore] = useState<number>(12);
 
-  const mainSearch = jobs.filter(
-    (job) =>
-      !mainFilter.position ||
-      job.position.toLowerCase().includes(mainFilter.position.toLowerCase())
-  );
+  const mainSearch = jobs.filter((job) => {
+    const search = mainFilter.position?.toLowerCase() || "";
+    return (
+      job.position.toLowerCase().includes(search) ||
+      job.company.toLowerCase().includes(search)
+    );
+  });
 
   const filteredJobs = mainSearch.filter((job) => {
     const matchesLocation =

@@ -45,8 +45,25 @@ export default function Filter({
         >
           <div
             className="py-[1.6rem]
-            w-full pr-[4rem]"
+            w-full pr-[3.2rem]
+            flex gap-[1.6rem]"
           >
+            <div className="hidden md:flex">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M16.024 15.0588H17.1123L23.9435 21.9037L21.9037 23.9435L15.0588 17.1123V16.0308L14.6824 15.6544C13.1286 16.9891 11.1093 17.7968 8.89842 17.7968C3.98374 17.7968 0 13.8131 0 8.89842C0 3.98374 3.98381 0 8.89842 0C13.813 0 17.7968 3.98374 17.7968 8.89842C17.7968 11.1093 16.9891 13.1286 15.6475 14.6824L16.024 15.0588ZM2.73799 8.89842C2.73799 12.3003 5.49651 15.0588 8.89842 15.0588C12.3003 15.0588 15.0588 12.3003 15.0588 8.89842C15.0588 5.49651 12.3003 2.73799 8.89842 2.73799C5.49651 2.73799 2.73799 5.49651 2.73799 8.89842Z"
+                  fill="#5964E0"
+                />
+              </svg>
+            </div>
             <input
               ref={inputRef}
               type="text"
@@ -54,7 +71,17 @@ export default function Filter({
               className="
               text-[1.6rem] font-[400] text-[#19202d]
               outline-none dark:text-white
-              transition-all duration-300 w-full
+              transition-all duration-300 w-full xl:hidden
+              "
+            />
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Filter by title, companies, expertise…"
+              className="
+              text-[1.6rem] font-[400] text-[#19202d]
+              outline-none dark:text-white
+              transition-all duration-300 w-full hidden xl:flex
               "
             />
           </div>
@@ -80,8 +107,8 @@ export default function Filter({
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M8.44772 0C10.6804 0 12.7797 0.870546 14.3585 2.45105C17.2803 5.37556 17.6434 10.8781 15.1348 14.2255L8.44772 23.894L1.75059 14.2119C-0.747974 10.8781 -0.384871 5.37556 2.53695 2.45105C4.11577 0.870546 6.21462 0 8.44772 0ZM5.47359 8.29091C5.47359 9.97484 6.84274 11.3455 8.52487 11.3455C10.207 11.3455 11.5762 9.97484 11.5762 8.29091C11.5762 6.60698 10.207 5.23636 8.52487 5.23636C6.84274 5.23636 5.47359 6.60698 5.47359 8.29091Z"
                 fill="#5964E0"
               />
@@ -103,7 +130,8 @@ export default function Filter({
         <div
           className="hidden md:flex
           w-full items-center
-          justify-between"
+          justify-between
+          "
         >
           <div
             className="flex gap-[1.6rem] items-center
@@ -116,13 +144,14 @@ export default function Filter({
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="cursor-pointer"
                 onClick={() => setChecked(false)}
               >
                 <rect width="24" height="24" rx="3" fill="#5964E0" />
                 <path
                   d="M6 12.5695L9.57248 16.142L18.7144 7"
                   stroke="white"
-                  stroke-width="2"
+                  strokeWidth="2"
                 />
               </svg>
             ) : (
@@ -138,9 +167,11 @@ export default function Filter({
 
             <p
               className="text-[1.6rem] font-bold 
-                text-[#19202d] dark:text-white"
+                text-[#19202d] dark:text-white
+                flex gap-[0.6rem]
+                items-center"
             >
-              Full Time
+              Full Time <span className="hidden xl:flex">Only</span>
             </p>
           </div>
           <div>
@@ -150,7 +181,8 @@ export default function Filter({
                 text-[1.6rem] font-[700] text-[#fff]
                 cursor-pointer px-[1.4rem]
                 hover:bg-[#939bf4]
-                transition-all duration-300"
+                transition-all duration-300
+                xl:px-[3.55rem]"
               onClick={() => {
                 handleLocation({ locationRef, setPopUpFilter });
                 handleContract({ check, setPopUpFilter });
@@ -193,8 +225,8 @@ export default function Filter({
         >
           <rect width="48" height="48" rx="5" fill="#5964E0" />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M27.3533 26.549H28.2603L33.9529 32.2531L32.2531 33.9529L26.549 28.2603V27.359L26.2353 27.0453C24.9405 28.1576 23.2578 28.8307 21.4153 28.8307C17.3198 28.8307 14 25.5109 14 21.4153C14 17.3198 17.3198 14 21.4153 14C25.5109 14 28.8306 17.3198 28.8306 21.4153C28.8306 23.2578 28.1576 24.9405 27.0396 26.2353L27.3533 26.549ZM16.2817 21.4153C16.2817 24.2503 18.5804 26.549 21.4153 26.549C24.2503 26.549 26.549 24.2503 26.549 21.4153C26.549 18.5804 24.2503 16.2817 21.4153 16.2817C18.5804 16.2817 16.2817 18.5804 16.2817 21.4153Z"
             fill="white"
           />
