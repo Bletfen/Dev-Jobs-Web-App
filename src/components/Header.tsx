@@ -20,15 +20,15 @@ export default function Header() {
   return (
     <div
       className="
-        bg-[url('assets/mobile/bg-pattern-header.svg')]
+        bg-[url('/assets/mobile/bg-pattern-header.svg')]
         px-[2.4rem] pt-[3.2rem] pb-[7.2rem]
-        md:bg-[url('assets/tablet/bg-pattern-header.svg')]
+        md:bg-[url('/assets/tablet/bg-pattern-header.svg')]
         md:bg-no-repeat md:bg-cover
         md:bg-[#f4f6f8] dark:md:bg-[#121721]
         transition-all duration-300
         md:px-[4rem] md:pt-[4.2rem]
         md:pb-[8.6rem]
-        xl:bg-[url('assets/mobile/bg-pattern-header.svg')]
+        xl:bg-[url('/assets/mobile/bg-pattern-header.svg')]
         xl:pt-[4.4rem] xl:bg-center
         "
     >
