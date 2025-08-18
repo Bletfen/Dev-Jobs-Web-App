@@ -67,3 +67,7 @@ Development Notes
     Data Handling: Fetched job data from a local JSON file, simulating an API response for development purposes.
 
     Theme Persistence: Integrated localStorage to remember user theme preferences (light/dark) across sessions.
+
+Contact
+
+For inquiries or feedback, please reach out via GitHub: @Bletfen
