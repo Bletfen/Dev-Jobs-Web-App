@@ -24,7 +24,8 @@ export default function FilterPopUp({
             -translate-x-1/2 -translate-y-1/2
             bg-white rounded-[0.6rem]
             max-w-[32.7rem]
-            flex flex-col"
+            flex flex-col dark:bg-[#19202d]
+            transition-all duration-300"
           >
             <div>
               <div
@@ -52,7 +53,7 @@ export default function FilterPopUp({
                   type="text"
                   placeholder="Filter by location…"
                   className="text-[#19202d] text-[1.6rem]
-                    outline-none"
+                    outline-none dark:text-white"
                 />
               </div>
               <div
@@ -66,10 +67,19 @@ export default function FilterPopUp({
                 ref={fullTimeRef}
                 className={`w-[2.4rem] h-[2.4rem]
                 rounded-[0.3rem] cursor-pointer
-                ${check ? "bg-[#5964e0]" : "bg-[#19202d] opacity-15"}`}
+                ${
+                  check
+                    ? "bg-[#5964e0]"
+                    : "bg-[#19202d] opacity-15 dark:bg-[#fff]"
+                }`}
                 onClick={() => setChecked((prev) => !prev)}
               ></button>
-              <p>Full Time Only</p>
+              <p
+                className="text-[1.6rem] font-bold 
+                text-[#19202d] dark:text-white"
+              >
+                Full Time Only
+              </p>
             </div>
             <div className="px-[2.4rem] pb-[2.4rem]">
               <button
