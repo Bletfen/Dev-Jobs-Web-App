@@ -1,69 +1,69 @@
-# React + TypeScript + Vite
+Dev Jobs Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive job board application designed to help developers find job opportunities effortlessly.
 
-Currently, two official plugins are available:
+Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Job Listings: Browse a curated list of developer job openings.
 
-## Expanding the ESLint configuration
+Filters: Refine job searches by title, location, and contract type.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Pagination: View jobs in manageable chunks with "Show More" functionality.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Job Details: Click on a job to view detailed information and application instructions.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Responsive Design: Optimized for desktop, tablet, and mobile devices.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Dark Mode: Theme can be toggled manually or remembered via localStorage for a persistent user preference.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Technologies Used
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Frontend: React, TypeScript, Vite
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Styling: Tailwind CSS
+
+State Management: React Context API
+
+Routing: React Router
+
+Data Source: Local JSON file
+
+Version Control: Git
+
+Installation
+
+Clone the repository:
+
+git clone https://github.com/Bletfen/Dev-Jobs-Web-App.git
+
+Navigate into the project directory:
+
+cd Dev-Jobs-Web-App
+
+Install dependencies:
+
+npm install
+
+Start the development server:
+
+    npm run dev
+
+    Open your browser and go to http://localhost:3000 to view the application.
+
+Deployment
+
+The application is deployed and can be accessed at:
+
+https://dev-jobs-web-app-lilac.vercel.app
+
+Development Notes
+
+    State Management: Utilized React Context API for global state management, ensuring a seamless experience across components.
+
+    Routing: Implemented React Router for navigation between job listings and detailed job pages.
+
+    Styling: Employed Tailwind CSS for utility-first styling, enabling rapid UI development.
+
+    Data Handling: Fetched job data from a local JSON file, simulating an API response for development purposes.
+
+    Theme Persistence: Integrated localStorage to remember user theme preferences (light/dark) across sessions.
