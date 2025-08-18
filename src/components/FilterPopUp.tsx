@@ -4,12 +4,10 @@ export default function FilterPopUp({
   showFilter,
   setShowFilter,
   setPopUpFilter,
-  popUpFilter,
 }: {
   showFilter: boolean;
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   setPopUpFilter: React.Dispatch<React.SetStateAction<PopUpFilterState>>;
-  popUpFilter: PopUpFilterState;
 }) {
   const locationRef = useRef<HTMLInputElement>(null);
   const fullTimeRef = useRef<HTMLButtonElement>(null);
