@@ -27,13 +27,19 @@ export const handleLocation = ({
 };
 
 export const handlePosition = ({
-  inputRef,
+  mobileInputRef,
+  desktopInputRef,
   setMainFilter,
 }: {
-  inputRef: React.RefObject<HTMLInputElement | null>;
+  mobileInputRef: React.RefObject<HTMLInputElement | null>;
+  desktopInputRef: React.RefObject<HTMLInputElement | null>;
   setMainFilter: React.Dispatch<React.SetStateAction<Partial<IJobs>>>;
 }) => {
-  if (inputRef.current) {
-    setMainFilter({ position: inputRef.current.value });
-  }
+  const mobileValue = mobileInputRef.current?.value.trim();
+  const desktopValue = desktopInputRef.current?.value.trim();
+
+  setMainFilter((prev) => ({
+    ...prev,
+    position: mobileValue || desktopValue || "",
+  }));
 };

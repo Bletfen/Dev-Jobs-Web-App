@@ -1,20 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Filter from "../components/Filter.tsx";
 import FilterPopUp from "../components/FilterPopUp.tsx";
 import { Link } from "react-router-dom";
-import { useJobsContext } from "../context/JobsContext.tsx";
+import {
+  useJobsContext,
+  useMainFilterContext,
+  usePopUpFilterContext,
+} from "../context/JobsContext.tsx";
 export default function JobsList() {
   const { jobs } = useJobsContext();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [mainFilter, setMainFilter] = useState<Partial<IJobs>>({
-    position: "",
-    company: "",
-  });
-  const [popUpFilter, setPopUpFilter] = useState<Partial<IJobs>>({
-    contract: "",
-    location: "",
-  });
+  const { mainFilter } = useMainFilterContext();
+  const { popUpFilter } = usePopUpFilterContext();
   const [showMore, setShowMore] = useState<number>(12);
 
   const mainSearch = jobs.filter((job) => {
@@ -53,12 +49,7 @@ export default function JobsList() {
         md:px-[3.9rem] min-h-screen
         "
     >
-      <Filter
-        setShowFilter={setShowFilter}
-        setMainFilter={setMainFilter}
-        inputRef={inputRef}
-        setPopUpFilter={setPopUpFilter}
-      />
+      <Filter />
 
       <div
         className="flex flex-col
@@ -156,11 +147,7 @@ export default function JobsList() {
       )}
 
       <div className="md:hidden">
-        <FilterPopUp
-          showFilter={showFilter}
-          setShowFilter={setShowFilter}
-          setPopUpFilter={setPopUpFilter}
-        />
+        <FilterPopUp />
       </div>
     </div>
   );

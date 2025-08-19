@@ -4,21 +4,21 @@ import {
   handleLocation,
   handlePosition,
 } from "../functions/function";
+import {
+  useMainFilterContext,
+  usePopUpFilterContext,
+  useShowFilterContext,
+} from "../context/JobsContext";
 
-export default function Filter({
-  setShowFilter,
-  setMainFilter,
-  inputRef,
-  setPopUpFilter,
-}: {
-  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
-  setMainFilter: React.Dispatch<React.SetStateAction<Partial<IJobs>>>;
-  inputRef: React.RefObject<HTMLInputElement | null>;
-  setPopUpFilter: React.Dispatch<React.SetStateAction<Partial<IJobs>>>;
-}) {
+export default function Filter() {
+  const { setShowFilter } = useShowFilterContext();
   const locationRef = useRef<HTMLInputElement>(null);
   const fullTimeRef = useRef<HTMLButtonElement>(null);
+  const desktopInputRef = useRef<HTMLInputElement>(null);
+  const mobileInputRef = useRef<HTMLInputElement>(null);
   const [check, setChecked] = useState<boolean>(false);
+  const { setMainFilter } = useMainFilterContext();
+  const { setPopUpFilter } = usePopUpFilterContext();
   return (
     <div
       className="flex justify-between items-center
@@ -65,7 +65,7 @@ export default function Filter({
               </svg>
             </div>
             <input
-              ref={inputRef}
+              ref={mobileInputRef}
               type="text"
               placeholder="Filter by title…"
               className="
@@ -75,7 +75,7 @@ export default function Filter({
               "
             />
             <input
-              ref={inputRef}
+              ref={desktopInputRef}
               type="text"
               placeholder="Filter by title, companies, expertise…"
               className="
@@ -186,7 +186,11 @@ export default function Filter({
               onClick={() => {
                 handleLocation({ locationRef, setPopUpFilter });
                 handleContract({ check, setPopUpFilter });
-                handlePosition({ inputRef, setMainFilter });
+                handlePosition({
+                  mobileInputRef,
+                  desktopInputRef,
+                  setMainFilter,
+                });
               }}
             >
               Search
@@ -220,7 +224,7 @@ export default function Filter({
           className="cursor-pointer
           md:hidden"
           onClick={() => {
-            handlePosition({ inputRef, setMainFilter });
+            handlePosition({ mobileInputRef, desktopInputRef, setMainFilter });
           }}
         >
           <rect width="48" height="48" rx="5" fill="#5964E0" />

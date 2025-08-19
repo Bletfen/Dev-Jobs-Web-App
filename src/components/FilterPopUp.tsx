@@ -1,17 +1,15 @@
 import { useRef, useState } from "react";
 import { handleContract, handleLocation } from "../functions/function";
-export default function FilterPopUp({
-  showFilter,
-  setShowFilter,
-  setPopUpFilter,
-}: {
-  showFilter: boolean;
-  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
-  setPopUpFilter: React.Dispatch<React.SetStateAction<Partial<IJobs>>>;
-}) {
+import {
+  usePopUpFilterContext,
+  useShowFilterContext,
+} from "../context/JobsContext";
+export default function FilterPopUp() {
+  const { showFilter, setShowFilter } = useShowFilterContext();
   const locationRef = useRef<HTMLInputElement>(null);
   const fullTimeRef = useRef<HTMLButtonElement>(null);
   const [check, setChecked] = useState<boolean>(false);
+  const { setPopUpFilter } = usePopUpFilterContext();
   return (
     <div className="md:hidden">
       {showFilter && (
